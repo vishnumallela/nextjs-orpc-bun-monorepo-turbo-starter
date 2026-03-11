@@ -1,0 +1,20 @@
+#!/bin/sh
+
+echo "Pre-commit: running checks for changed packages"
+
+echo "Step 1/2: Lint + format (Ultracite) on repo"
+if ! bunx ultracite fix; then
+  echo "Ultracite fix failed. Fix the reported issues and retry."
+  exit 1
+fi
+
+echo "Staging any files updated by Ultracite"
+git add -A
+
+echo "Step 2/2: Type-check (tsc --noEmit) on changed packages"
+if ! bunx turbo run type-check --filter=[HEAD^1]; then
+  echo "Type-check failed. Fix the TypeScript errors and retry."
+  exit 1
+fi
+
+echo "All checks passed. Proceeding with commit."

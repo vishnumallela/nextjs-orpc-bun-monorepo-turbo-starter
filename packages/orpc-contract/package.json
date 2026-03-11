@@ -1,0 +1,19 @@
+{
+  "name": "orpc-contract",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@orpc/contract": "^1.13.4",
+    "zod": "^4.3.6"
+  }
+}
